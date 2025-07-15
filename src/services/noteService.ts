@@ -36,7 +36,8 @@ export async function createNote(newNote: NewNote):Promise<Note> {
 
 export async function deleteNote(noteId: number) {
   try {
-    await axios.delete(`/notes/${noteId}`)
+    const response = await axios.delete<Note>(`/notes/${noteId}`)
+    return response.data;
   } catch {
     throw new Error("Delete task failed");
   }

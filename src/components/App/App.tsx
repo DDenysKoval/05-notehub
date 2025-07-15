@@ -9,6 +9,7 @@ import Modal from "../Modal/Modal";
 import { useDebouncedCallback } from "use-debounce";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import NoteForm from "../NoteForm/NoteForm";
 
 export default function App() {
   const [page, setPage] = useState(1);
@@ -61,7 +62,10 @@ export default function App() {
           }
         </section>
       </main>
-      {isModalOpen && <Modal onClose={handleClose} />}
+      {isModalOpen &&
+        <Modal onClose={handleClose} >
+          <NoteForm onClose={handleClose} />
+        </Modal>}
     </div>
   )
 }

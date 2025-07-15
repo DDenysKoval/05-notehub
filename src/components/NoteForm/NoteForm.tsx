@@ -30,6 +30,7 @@ const OrderFormSchema = Yup.object().shape({
   content: Yup.string()
     .max(500, "Content is too long"),
   tag: Yup.string()
+    .oneOf(["Todo" , "Work" , "Personal" , "Meeting" , "Shopping"], "Invalid tag")
     .required("Choose note's tag")
 })
 
@@ -62,7 +63,7 @@ export default function NoteForm({onClose}:NoteFormProps) {
         <div className={css.formGroup}>
           <label htmlFor={`${fieldId}-title`}>Title</label>
           <Field id={`${fieldId}-title`} type="text" name="title" className={css.input} />
-          <ErrorMessage name="title" className={css.error} />
+          <ErrorMessage name="title" className={css.error} component="span"/>
         </div>
   
         <div className={css.formGroup}>
@@ -71,10 +72,10 @@ export default function NoteForm({onClose}:NoteFormProps) {
             as="textarea"
             id={`${fieldId}-content`}
             name="content"
-            rows="8"
+            rows={8}
             className={css.textarea}
           />
-          <ErrorMessage name="content" className={css.error} />
+          <ErrorMessage name="content" className={css.error} component="span"/>
         </div>
   
         <div className={css.formGroup}>
@@ -86,7 +87,7 @@ export default function NoteForm({onClose}:NoteFormProps) {
             <option value="Meeting">Meeting</option>
             <option value="Shopping">Shopping</option>
           </Field>
-          <ErrorMessage name="tag" className={css.error} />
+          <ErrorMessage name="tag" className={css.error} component="span"/>
         </div>
   
         <div className={css.actions}>
